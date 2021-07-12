@@ -180,7 +180,7 @@ public class SellerDaoJDBC implements SellerDao {
 	}
 	
 	@Override
-	public List<Seller> findByDepartment(Department department) {
+	public List<Seller> findByDepartmentId(Integer id) {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 		
@@ -191,7 +191,7 @@ public class SellerDaoJDBC implements SellerDao {
 				+ "ON seller.DepartmentId = department.Id "
 				+ "WHERE DepartmentId = ? "
 				+ "ORDER BY Name");
-			st.setInt(1, department.getId());
+			st.setInt(1, id);
 			rs = st.executeQuery();
 			
 			List<Seller> list = new ArrayList<>();
@@ -234,10 +234,4 @@ public class SellerDaoJDBC implements SellerDao {
 		obj.setDepartment(dep);
 		return obj;
 	}
-	
-	/* Transaction
-	conn.setAutoCommit(false);
-	conn.commit();
-	conn.rollback();	
-	*/
 }

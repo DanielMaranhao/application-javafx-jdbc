@@ -26,10 +26,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.util.Callback;
 import model.entities.Department;
 import model.entities.Seller;
 import model.exceptions.ValidationException;
@@ -139,7 +136,7 @@ public class SellerFormController implements Initializable {
 		Constraints.setTextFieldDouble(txtBaseSalary);
 		Constraints.setTextFieldMaxLength(txtEmail, 60);
 		Utils.formatDatePicker(dpBirthDate, "dd/MM/yyyy");
-		initializeComboBoxDepartment();
+		Utils.formatComboBox(comboBoxDepartment, department -> department.getName());		
 	}
 	
 	public void loadAssociatedObjects() {
@@ -149,19 +146,7 @@ public class SellerFormController implements Initializable {
 		List<Department> list = departmentService.findAll();
 		obsList = FXCollections.observableArrayList(list);
 		comboBoxDepartment.setItems(obsList);		
-	}
-	
-	private void initializeComboBoxDepartment() {
-		Callback<ListView<Department>, ListCell<Department>> factory = lv -> new ListCell<>() {
-			@Override
-			protected void updateItem(Department item, boolean empty) {
-				super.updateItem(item, empty);
-				setText(empty ? "" : item.getName());
-			}
-		};
-		comboBoxDepartment.setCellFactory(factory);
-		comboBoxDepartment.setButtonCell(factory.call(null));
-	}
+	}	
 
 	public void updateFormData() {
 		if (entity == null) {

@@ -119,17 +119,15 @@ public class DepartmentListController implements Initializable, DataChangeListen
 	private void initEditButtons() {
 		tableColumnEDIT.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnEDIT.setCellFactory(param -> new TableCell<>() {
-			private final Button button = new Button("edit");
+			private final Button button = new Button("edit");		
 			
 			@Override
 			protected void updateItem(Department obj, boolean empty) {
-				super.updateItem(obj, empty);
-				
+				super.updateItem(obj, empty);				
 				if(empty) {
 					setGraphic(null);
 					return;
-				}
-				
+				}				
 				setGraphic(button);
 				button.setOnAction(
 					event -> createDialogForm(
@@ -145,13 +143,11 @@ public class DepartmentListController implements Initializable, DataChangeListen
 			
 			@Override
 			protected void updateItem(Department obj, boolean empty) {
-				super.updateItem(obj, empty);
-				
+				super.updateItem(obj, empty);				
 				if(empty) {
 					setGraphic(null);
 					return;
-				}
-				
+				}				
 				setGraphic(button);
 				button.setOnAction(event -> removeEntity(obj));
 			}			
